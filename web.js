@@ -6,9 +6,22 @@ app.get('/', function(request, response) {
   response.send('Hello World 2!');
 });
 
-fs = require('fs');
-var text = fs.readFileSync('index.html','utf8');
-response.send(text);
+var content;
+// First I want to read the file
+fs.readFile('./index.html', function read(err, data) {
+    if (err) {
+        throw err;
+    }
+    content = data;
+
+    // Invoke the next step here however you like
+    console.log(content);   // Put all of the code here (not the best solution)
+    processFile();          // Or put the next step in a function and invoke it
+});
+
+function processFile() {
+    console.log(content);
+}
 
 var port = process.env.PORT || 5000;
 app.listen(port, function() {
