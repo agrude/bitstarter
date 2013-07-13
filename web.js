@@ -6,13 +6,9 @@ app.get('/', function(request, response) {
   response.send('Hello World 2!');
 });
 
-fs = require('fs')
-fs.readFile('index.html', 'utf8', function (err,data) {
-  if (err) {
-    return console.log(err);
-  }
-  console.log(data);
-});
+fs = require('fs');
+var text = fs.readFileSync('index.html','utf8');
+response.send(text);
 
 var port = process.env.PORT || 5000;
 app.listen(port, function() {
